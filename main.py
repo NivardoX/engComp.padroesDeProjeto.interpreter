@@ -1,43 +1,30 @@
-import abc
+class Context:
+    def __init__(self):
+        self.input = ""
+        self.output = ""
 
 
-class AbstractExpression(metaclass=abc.ABCMeta):
-    """
-    Declare an abstract Interpret operation that is common to all nodes
-    in the abstract syntax tree.
-    """
-
-    @abc.abstractmethod
-    def interpret(self):
+class AbstractExpression:
+    def Interpret(self, context):
         pass
+
+
+class Expression(AbstractExpression):
+    def Interpret(self, context):
+        print("terminal interpret")
 
 
 class NonterminalExpression(AbstractExpression):
-    """
-    Implement an Interpret operation for nonterminal symbols in the grammar.
-    """
-
-    def __init__(self, expression):
-        self._expression = expression
-
-    def interpret(self):
-        self._expression.interpret()
-
-
-class TerminalExpression(AbstractExpression):
-    """
-    Implement an Interpret operation associated with terminal symbols in
-    the grammar.
-    """
-
-    def interpret(self):
-        pass
-
-
-def main():
-    abstract_syntax_tree = NonterminalExpression(TerminalExpression())
-    abstract_syntax_tree.interpret()
+    def Interpret(self, context):
+        print("Nonterminal interpret")
 
 
 if __name__ == "__main__":
-    main()
+    context = ""
+    c = []
+    c = c + [Expression()]
+    c = c + [NonterminalExpression()]
+    c = c + [Expression()]
+    c = c + [Expression()]
+    for a in c:
+        a.Interpret(context)
